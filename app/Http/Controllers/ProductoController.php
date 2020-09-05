@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Categoria;
+use App\Producto;
 use Illuminate\Http\Request;
 
-class CategoriaController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-//        $categria = new Categoria();
-//        $categria->nombre = 'Cerialeshjsdf';
-//        $categria->descripcion = ' todo los ceriales';
-//        $categria->save();
-
-        $categorias = Categoria::all();
-        return response()->json(['data' => $categorias, 'status_code' => 200, 'state' => true]);
-
+        $productos = Producto::all();
+        return response()->json(['data'=>$productos, 'state'=>true]);
     }
 
     /**
@@ -42,13 +36,7 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $model = new Categoria($request->all());
-        if ( $model->save()) {
-            return  response()->json(['data' => $model]);
-        } else {
-            return  response()->json(['data' => null]);
-        }
-
+        //
     }
 
     /**
@@ -70,8 +58,7 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        $model = Categoria::find($id);
-        return  response()->json(['data' => $model]);
+        //
     }
 
     /**
@@ -83,14 +70,7 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = Categoria::find($id);
-        $model->fill($request->all());
-        if ( $model->save()) {
-            return response()->json(['data'=> $model, 'state_code'=> 200, 'state'=>true]);
-        } else {
-            return response()->json(['data'=> null, 'state_code'=> 401, 'state'=>false]);
-        }
-
+        //
     }
 
     /**
@@ -101,15 +81,6 @@ class CategoriaController extends Controller
      */
     public function destroy($id)
     {
-        $model = Categoria::find($id);
-
-        if($model->delete()) {
-            return response()->json(['data'=>$id, 'state_code'=>200, 'status'=>true]);
-        } else {
-
-            return response()->json(['data'=>$id, 'state_code'=>401, 'status'=>false]);
-        }
-
-
+        //
     }
 }
