@@ -36,7 +36,12 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Producto($request->all());
+        if ( $model->save()) {
+            return  response()->json(['data' => $model]);
+        } else {
+            return  response()->json(['data' => $model]);
+        }
     }
 
     /**
@@ -58,7 +63,8 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Producto::find($id);
+        return  response()->json(['data' => $model]);
     }
 
     /**
@@ -70,7 +76,13 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = Producto::find($id);
+        $model->fill($request->all());
+        if ( $model->save()) {
+            return response()->json(['data'=> $model, 'state_code'=> 200, 'state'=>true]);
+        } else {
+            return response()->json(['data'=> null, 'state_code'=> 401, 'state'=>false]);
+        }
     }
 
     /**
@@ -81,6 +93,14 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = Producto::find($id);
+
+        if($model->delete()) {
+            return response()->json(['data'=>$id, 'state_code'=>200, 'status'=>true]);
+        } else {
+
+            return response()->json(['data'=>$id, 'state_code'=>401, 'status'=>false]);
+        }
+
     }
 }
