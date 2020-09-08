@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+use App\Http\Requests\CategoriaRequest;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -40,7 +41,7 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
         $model = new Categoria($request->all());
         if ( $model->save()) {

@@ -17,3 +17,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## comandos artisan
 php artisan migrate
 php artisan migrate:rollback
+
+ php artisan make:request ProductoRequest
