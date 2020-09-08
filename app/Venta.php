@@ -8,6 +8,6 @@ class Venta extends Model
 {
     //
     protected $fillable = [
-        'codigo', 'monto',
+        'codigo', 'monto', 'user_id',
     ];
 }
