@@ -46,4 +46,8 @@ class UserController extends Controller
             return response()->json(['state' => false, 'message' => 'error al logout']);
         }
     }
+    public function query() {
+        $model = User::where('nombre', '=', 'admin')->get();
+        return response()->json(['dara'=>$model ]);
+    }
 }

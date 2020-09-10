@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -54,7 +57,29 @@ class Handler extends ExceptionHandler
         if ($exception instanceof  ValidationException) {
             return $this->convertValidationExceptionToResponse($exception, $request);
         }
-        return parent::render($request, $exception);
+        if ($exception instanceof NotFoundHttpException) {
+            return response()->json(['error' => ' no existe la ruta'],404);
+        }
+        if( $exception instanceof MethodNotAllowedHttpException) {
+            return  response()->json(['error'=>'El metodo no es la correcta']);
+        }
+
+        if ( $exception instanceof QueryException) {
+            return  response()->json(['error ', ' Error en sql '], 409);
+           // return response()
+        }
+        if ( $exception instanceof \HttpException) {
+            return  response()->json(['error' => $exception->getMessage()], $exception->getSatusCode());
+        }
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
+
+        return response()->json(['error' =>'Error en el servicor'], 500);
+
+
+
+//
     }
 
     public function convertValidationExceptionToResponse(ValidationException $e, $request) {
