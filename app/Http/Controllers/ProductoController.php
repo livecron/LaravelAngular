@@ -39,9 +39,9 @@ class ProductoController extends Controller
     {
         $model = new Producto($request->all());
         if ( $model->save()) {
-            return  response()->json(['data' => $model]);
+            return  response()->json(['data' => $model, 'state'=>true, 'statusCode'=>201], 201);
         } else {
-            return  response()->json(['data' => $model]);
+            return  response()->json(['data' => $model, 'state'=>false, 'statusCode'=>400], 400);
         }
     }
 

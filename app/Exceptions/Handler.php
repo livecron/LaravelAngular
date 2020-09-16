@@ -58,28 +58,25 @@ class Handler extends ExceptionHandler
             return $this->convertValidationExceptionToResponse($exception, $request);
         }
         if ($exception instanceof NotFoundHttpException) {
-            return response()->json(['error' => ' no existe la ruta'],404);
+            return  response()->json(['data'=> null, 'message' => 'El metodo no es la correcta', 'state' => false, 'satusCode'=> 404], 404);
+
         }
         if( $exception instanceof MethodNotAllowedHttpException) {
-            return  response()->json(['error'=>'El metodo no es la correcta']);
+            return  response()->json(['data'=> null, 'message' => 'El metodo no es la correcta', 'state' => false, 'satusCode'=> 400], 400);
         }
 
         if ( $exception instanceof QueryException) {
-            return  response()->json(['error ', ' Error en sql '], 409);
+            return  response()->json(['data'=> null, 'message'=>' Error en sql', 'state' =>false,  'statusCode' => 409], 409);
            // return response()
         }
         if ( $exception instanceof \HttpException) {
-            return  response()->json(['error' => $exception->getMessage()], $exception->getSatusCode());
+            return  response()->json(['data'=> null, 'message' => $exception->getMessage(), 'state' => false, 'satusCode'=> $exception->getSatusCode()], $exception->getSatusCode());
         }
         if (config('app.debug')) {
             return parent::render($request, $exception);
         }
+        return  response()->json(['data'=> null, 'message' => 'Error en el servicor', 'state' => false, 'satusCode'=> 500], 500);
 
-        return response()->json(['error' =>'Error en el servicor'], 500);
-
-
-
-//
     }
 
     public function convertValidationExceptionToResponse(ValidationException $e, $request) {

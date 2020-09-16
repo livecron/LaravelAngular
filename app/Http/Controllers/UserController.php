@@ -32,7 +32,7 @@ class UserController extends Controller
                 return response()->json(['error' => 'credenciales invalidos'], 400);
             }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'error al iniciar session'], 500);
+            return response()->json(['error' => 'error al iniciar session'], 402);
         }
 
         return response()->json(compact('token'));

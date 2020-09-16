@@ -31,4 +31,12 @@ class RegisterRequest extends FormRequest
             'password'=>'required|string|min:5'
         ];
     }
+    public function messages()
+    {
+        return [
+            'nombre.required' =>'El nombre es requerido',
+            'email.unique' =>' Ya existe un registro con el email ingresado',
+            'password.min' =>' El mínimo de caracteres debe ser mayor a 5',
+        ];
+    }
 }

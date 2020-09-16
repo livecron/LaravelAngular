@@ -19,3 +19,5 @@ php artisan migrate
 php artisan migrate:rollback
 
  php artisan make:request ProductoRequest
+## para actualizar el auth si hay problemas
+composer require tymon/jwt-auth:dev-develop --prefer-source
