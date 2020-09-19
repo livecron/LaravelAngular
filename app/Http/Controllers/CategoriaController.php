@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Categoria;
 use App\Http\Requests\CategoriaRequest;
-use Illuminate\Http\Reques;
+use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
@@ -45,9 +45,9 @@ class CategoriaController extends Controller
     {
         $model = new Categoria($request->all());
         if ( $model->save()) {
-            return  response()->json(['data' => $model]);
+            return  response()->json(['data' => $model, 'status_code' => 201, 'state' => true]);
         } else {
-            return  response()->json(['data' => null]);
+            return  response()->json(['data' => null, 'status_code' => 402, 'state' => false]);
         }
 
     }
@@ -86,7 +86,7 @@ class CategoriaController extends Controller
     {
         $model = Categoria::find($id);
         $model->fill($request->all());
-        if ( $model->save()) {
+        if ($model->save()) {
             return response()->json(['data'=> $model, 'state_code'=> 200, 'state'=>true]);
         } else {
             return response()->json(['data'=> null, 'state_code'=> 401, 'state'=>false]);

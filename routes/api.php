@@ -22,8 +22,9 @@ Route::resource('productos', 'ProductoController');
 Route::resource('ventas', 'VentaController');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
-    Route::resource('categorias', 'CategoriaController');
+//    Route::resource('categorias', 'CategoriaController');
 });
+Route::resource('categorias', 'CategoriaController');
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 Route::post('logout', 'UserController@logout');
